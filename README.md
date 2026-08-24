@@ -2,9 +2,7 @@
 
 An agentic code-auditing tool that scans local QA repositories, sends selected source files through an LLM-backed analysis workflow, enforces structured output with Pydantic, and writes machine-readable JSON audit artifacts.
 
-The project explores a practical quality-engineering question: how do you use generative AI inside an automated workflow without relying on free-form conversational output?
-
-Built by **Michael D. Jensen** — Senior QA Engineer with 15+ years of enterprise testing experience, currently working with Python automation, structured data validation, and AI-assisted QA workflows.
+The project explores a practical quality-engineering question: **how can generative AI be used inside an automated QA workflow without treating free-form conversational output as a reliable system interface?**
 
 🔗 [LinkedIn](https://www.linkedin.com/in/michaeljensen-qa/) | 🐙 [GitHub](https://github.com/jensenmd) | 📧 jensen.md@gmail.com
 
@@ -145,17 +143,17 @@ python showcase_dashboard.py
 
 ## Relationship to Other Portfolio Projects
 
-This project is part of a seven-project QA portfolio demonstrating complementary quality engineering skills:
+This project is part of a broader QA portfolio demonstrating complementary quality engineering skills:
 
 | Project | Focus | Stack |
 | --- | --- | --- |
 | **agentqa-orchestrator** (this repo) | Agentic code auditing with structured LLM output | Python / Gemini / Pydantic / JSON |
+| [mapmyrun-quality-investigation](https://github.com/jensenmd/mapmyrun-quality-investigation) | Black-box mobile/GPS QA investigation — field testing and evidence-bounded analysis | iPhone / Apple Watch / MapMyRun / field evidence |
 | [claude-code-qa-sessions](https://github.com/jensenmd/claude-code-qa-sessions) | Agentic QA analysis with human-reviewed recommendations | Claude Code / GitHub / QA analysis |
 | [ai-qa-framework](https://github.com/jensenmd/ai-qa-framework) | AI-assisted test generation, human-in-the-loop validation | Python / Claude API / pytest / GitHub Actions |
 | [qa-automation-showcase](https://github.com/jensenmd/qa-automation-showcase) | REST API testing, data validation, CI/CD integration | Python / pytest / Postman / GitHub Actions |
 | [restful-booker-qa](https://github.com/jensenmd/restful-booker-qa) | Full-stack layered testing — API + UI automation | Postman / Newman / Playwright / GitHub Actions |
 | [pharmacy-spend-etl-qa](https://github.com/jensenmd/pharmacy-spend-etl-qa) | ETL pipeline validation, SQL-driven data integrity testing | Python / pytest / SQLite / pandas |
-| [mapmyrun-quality-investigation](https://github.com/jensenmd/mapmyrun-quality-investigation) | Black-box mobile/GPS QA investigation — field testing and evidence-bounded analysis | iPhone / Apple Watch / MapMyRun / field evidence |
 
 Together they demonstrate API testing, data validation, UI automation, ETL quality, AI-assisted QA workflows, agentic code analysis, exploratory investigation, and evidence-driven quality engineering across multiple system layers.
 
