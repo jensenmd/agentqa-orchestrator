@@ -1,37 +1,40 @@
 # agentqa-orchestrator
 
-A localized, agentic code auditing engine that acts as a strict, programmatic boundary gate over local repository files. This project demonstrates how to abstract generative intelligence into a strict Quality Gate—forcing deterministic, machine-readable JSON outputs rather than free-form conversational text.
+An agentic code-auditing tool that scans local QA repositories, sends selected source files through an LLM-backed analysis workflow, enforces structured output with Pydantic, and writes machine-readable JSON audit artifacts.
 
-![FINAL ENGINE METRICS](reports/showcase_dashboard_preview.png)
+The project explores a practical quality-engineering question: how do you use generative AI inside an automated workflow without relying on free-form conversational output?
 
-Built by **Michael D. Jensen** — Senior QA Engineer with 15+ years of enterprise testing experience, currently focusing on Python automation, structured data validation, and AI-orchestrated quality practices.
+Built by **Michael D. Jensen** — Senior QA Engineer with 15+ years of enterprise testing experience, currently working with Python automation, structured data validation, and AI-assisted QA workflows.
 
-🔗 [LinkedIn](https://www.linkedin.com/in/michaeljensen-qa/) | 📧 jensen.md@gmail.com
-
----
-
-## Portfolio Visual Key Alignment
-
-This repository aligns with the custom visual encoding framework established on my main profile dashboard.
-
-### System Configuration Specs
-- **🟡 Gold Bar (AI Involvement):** Direct integration with the Gemini execution engine (`gemini-2.5-flash`).
-- **🟣 Purple Bar (Infrastructure):** Localized Python orchestration layer running isolated virtual environment (`.venv`) boundaries.
-- **AI Ring Level 4 (AI Orchestrating AI):** Programmatic multi-model validation architecture directing and evaluating underlying script targets.
-- **Disciplines Present:** ▰ Manual/Functional | ▰ API Testing | ▰ Data Validation | ▱ UI Automation | ▱ CI/CD Integration | ▰ AI Involvement
+🔗 [LinkedIn](https://www.linkedin.com/in/michaeljensen-qa/) | 🐙 [GitHub](https://github.com/jensenmd) | 📧 jensen.md@gmail.com
 
 ---
 
 ## What This Project Demonstrates
 
-| Component | Stack | Coverage & Purpose |
-|---|---|---|
-| **Local Directory Scanner** | Python OS Layer | Dynamically inventories, filters, and maps targeted source code files relative to the active workspace. |
-| **Schema Enforcer** | Pydantic v2 | Programmatically binds LLM token outputs to a strict, typed database writer schema rather than a chat companion. |
-| **Pacing & Resilience** | Python Core Exceptions | Built-in error routing and custom cooldown buckets to handle rate-limiting boundaries on public API gateways. |
-| **Presentation Dashboard** | Console Table UI | Safely processes structured JSON results to print a clean runtime metric table directly to the command-line interface. |
+| Component | Stack | Purpose |
+| --- | --- | --- |
+| **Local Directory Scanner** | Python | Inventories and filters target repository files for analysis |
+| **LLM Audit Workflow** | Google GenAI / Gemini 2.5 Flash | Analyzes selected source files for quality signals |
+| **Schema Enforcement** | Pydantic v2 | Converts open-ended LLM output into structured, typed audit data |
+| **Artifact Generation** | JSON | Writes one machine-readable audit artifact per analyzed file |
+| **Runtime Dashboard** | Python console output | Summarizes health scores and audit status across the target repository |
+| **Resilience Handling** | Python exceptions / pacing | Handles API failures and rate-limit boundaries during analysis |
 
-The combination of strict typing schemas and localized orchestrator loops reflects how modern AI quality gates must be built for production environments: eliminating conversational fluff to turn open-ended AI into machine-readable verification data.
+The combination of structured schemas and local orchestration demonstrates one way to turn open-ended LLM analysis into repeatable, machine-readable QA output.
+
+---
+
+## Design Approach
+
+The project separates the workflow into four responsibilities:
+
+- repository discovery and file selection
+- LLM-backed code analysis
+- schema validation and structured artifact generation
+- human-readable summary reporting
+
+The goal is to keep generative analysis inside a predictable programmatic workflow rather than treating conversational output as the final QA artifact.
 
 ---
 
@@ -39,20 +42,27 @@ The combination of strict typing schemas and localized orchestrator loops reflec
 
 ```text
 agentqa-orchestrator/
-├── file_scanner.py         # Handles local repository mapping and file filtration
-├── code_auditor.py         # Core orchestrator loop with schema enforcement and pacing
-├── showcase_dashboard.py   # Formats and prints the final engine metric dashboard
-├── reports/                # Localized storage destination for generated JSON artifacts
+├── file_scanner.py         # Maps and filters target repository files
+├── code_auditor.py         # Core audit workflow and schema enforcement
+├── showcase_dashboard.py   # Runs the audit and prints summary metrics
+├── test_connection.py      # Verifies API connectivity
+├── test_schema.py          # Validates structured audit schema behavior
+├── reports/                # Generated JSON audit artifacts
 │   ├── audit_validate_brewery_data.json
 │   ├── audit_conftest.json
 │   └── audit_test_api.json
 └── README.md
+```
 
-Sample Telemetry Output
-When executed against a target automation framework, the engine steps through the target files sequentially and prints a clean evaluation ledger upon completion:
+---
 
+## Sample Telemetry Output
+
+When executed against a target QA repository, the orchestrator processes selected files sequentially and writes structured audit artifacts:
+
+```text
 ====================================================================
-                    AGENTIC QA AUDIT ENGINE                         
+                    AGENTIC QA AUDIT ENGINE
 ====================================================================
 Scanning target directory: C:\Users\mdj3n\Documents\dev\qa-automation-showcase
 
@@ -71,42 +81,91 @@ Scanning target directory: C:\Users\mdj3n\Documents\dev\qa-automation-showcase
   -> Exported structured JSON to reports\audit_test_api.json
 
 ====================================================================
-                        FINAL ENGINE METRICS                         
+                        FINAL ENGINE METRICS
 ====================================================================
- FILE NAME                      | HEALTH SCORE | STATUS    
+ FILE NAME                      | HEALTH SCORE | STATUS
 --------------------------------------------------------------------
- validate_brewery_data.py       | [75 / 100]   | 🟢 PASS
- conftest.py                    | [80 / 100]   | 🟢 PASS
- test_api.py                    | [88 / 100]   | 🟢 PASS
+ validate_brewery_data.py       | [75 / 100]   | PASS
+ conftest.py                    | [80 / 100]   | PASS
+ test_api.py                    | [88 / 100]   | PASS
 --------------------------------------------------------------------
 [COMPLETE] Artifact generation cycle finished. Target directory analyzed.
 ====================================================================
+```
 
-Each audited file generates an isolated JSON artifact containing categorical fields for health_score, test_coverage_gaps, code_smells, and recommended_refactor code blocks.
+Each audited file generates an isolated JSON artifact containing structured fields such as:
 
-Running Locally
-Prerequisites
-Python 3.10+
+- `health_score`
+- `test_coverage_gaps`
+- `code_smells`
+- `recommended_refactor`
 
-Active Gemini API Key
+This makes the LLM output easier to inspect, compare, store, and consume programmatically.
 
-1. Initialize Environment
-Ensure your virtual environment is active and pull down required core packages:
+---
 
-# Activate local virtual environment
+## Running Locally
+
+### Prerequisites
+
+- Python 3.10+
+- Gemini API key
+
+### 1. Initialize the Environment
+
+Activate the virtual environment:
+
+```powershell
 .venv\Scripts\Activate.ps1
+```
 
-# Install core dependencies
+Install the core dependencies:
+
+```powershell
 pip install google-genai pydantic
+```
 
-2. Set Up API Credentials
-Bind your API access key locally to your current terminal environment:
+### 2. Set API Credentials
 
+Set the Gemini API key in the current PowerShell session:
+
+```powershell
 $env:GEMINI_API_KEY="your_actual_api_key_here"
+```
 
-3. Execute the Engine
-Run the dashboard entry point to scan your target repository:
+### 3. Run the Audit
 
+Execute the dashboard entry point:
+
+```powershell
 python showcase_dashboard.py
+```
 
-🌐 The Automated Quality Engineering SuiteThis repository is part of a synchronized ecosystem of projects engineered to demonstrate enterprise-grade automation architectures, data validation pipelines, and agentic AI quality gates.RepositoryFocus TierPrimary Tech StackSystem Role & Technical Purposeagentqa-orchestratorAgentic AI LayerPython, Google GenAI, PydanticAI Level 4 Platform: Autonomous structural code audit engine. Enforces strict schema compilation onto open-ended LLM streams.claude-code-qa-sessionsAI Agent InteractionClaude Code, CLI AgentsAI Level 3 Agent Interaction: Real-world execution logs utilizing Claude Code for agentic file analysis and human-in-the-loop validation checkpoints.qa-automation-showcaseAutomation CorePython, Pytest, Pandas, GHACore test target foundation. Showcases regression suites, dataset validation, and CI/CD pipelines.pharmacy-spend-etl-qaData & ETL IntegrityPython, SQL, Backend ValidationEnterprise data validation engine. Targets analytical data pipelines, schema changes, and complex math integrity.restful-booker-qaAPI ArchitecturePostman, Newman, PlaywrightFull-stack layered testing framework mapping contract compliance and end-to-end browser workflows.ai-qa-frameworkExperimental R&DPython, AI OrchestrationTargeted sandbox framework evaluating AI-assisted test case derivation and automation workflows.Author & Engineering ContactMichael D. Jensen — Senior QA Engineer15+ years of enterprise software testing experience spanning Healthcare IT, Financial Architectures, and Telecommunications. Focused entirely on backend data integrity, programmatic API contracts, and scalable automation pipelines.🔗 LinkedIn | 🐙 GitHub Hub | 📧 jensen.md@gmail.com
+---
+
+## Relationship to Other Portfolio Projects
+
+This project is part of a seven-project QA portfolio demonstrating complementary quality engineering skills:
+
+| Project | Focus | Stack |
+| --- | --- | --- |
+| **agentqa-orchestrator** (this repo) | Agentic code auditing with structured LLM output | Python / Gemini / Pydantic / JSON |
+| [claude-code-qa-sessions](https://github.com/jensenmd/claude-code-qa-sessions) | Agentic QA analysis with human-reviewed recommendations | Claude Code / GitHub / QA analysis |
+| [ai-qa-framework](https://github.com/jensenmd/ai-qa-framework) | AI-assisted test generation, human-in-the-loop validation | Python / Claude API / pytest / GitHub Actions |
+| [qa-automation-showcase](https://github.com/jensenmd/qa-automation-showcase) | REST API testing, data validation, CI/CD integration | Python / pytest / Postman / GitHub Actions |
+| [restful-booker-qa](https://github.com/jensenmd/restful-booker-qa) | Full-stack layered testing — API + UI automation | Postman / Newman / Playwright / GitHub Actions |
+| [pharmacy-spend-etl-qa](https://github.com/jensenmd/pharmacy-spend-etl-qa) | ETL pipeline validation, SQL-driven data integrity testing | Python / pytest / SQLite / pandas |
+| [mapmyrun-quality-investigation](https://github.com/jensenmd/mapmyrun-quality-investigation) | Black-box mobile/GPS QA investigation — field testing and evidence-bounded analysis | iPhone / Apple Watch / MapMyRun / field evidence |
+
+Together they demonstrate API testing, data validation, UI automation, ETL quality, AI-assisted QA workflows, agentic code analysis, exploratory investigation, and evidence-driven quality engineering across multiple system layers.
+
+---
+
+## Author
+
+**Michael D. Jensen**  
+Senior QA Engineer
+
+15+ years of enterprise software quality experience across healthcare IT, financial systems, telecommunications, and cybersecurity, with current hands-on work in Python automation, API testing, data validation, AI-assisted QA workflows, and quality engineering investigations.
+
+🔗 [LinkedIn](https://www.linkedin.com/in/michaeljensen-qa/) | 🐙 [GitHub](https://github.com/jensenmd) | 📧 jensen.md@gmail.com
