@@ -1,5 +1,7 @@
 # agentqa-orchestrator
 
+![agentqa-orchestrator portfolio project card](agentqa-orchestrator-project-card.png)
+
 An agentic code-auditing tool that scans local QA repositories, sends selected source files through an LLM-backed analysis workflow, enforces structured output with Pydantic, and writes machine-readable JSON audit artifacts.
 
 The project explores a practical quality-engineering question: **how can generative AI be used inside an automated QA workflow without treating free-form conversational output as a reliable system interface?**
@@ -175,7 +177,7 @@ This project is part of a broader QA portfolio demonstrating complementary quali
 | [qa-automation-showcase](https://github.com/jensenmd/qa-automation-showcase) | REST API testing, data validation, and CI/CD-integrated automation |
 | [ai-qa-framework](https://github.com/jensenmd/ai-qa-framework) | Human-reviewed AI-assisted test generation with structured cases and pytest execution |
 | [claude-code-qa-sessions](https://github.com/jensenmd/claude-code-qa-sessions) | Agentic analysis of existing QA repositories with human review and targeted implementation |
-| [agentqa-orchestrator](https://github.com/jensenmd/agentqa-orchestrator) | Structured agentic code auditing using Python, Pydantic, Gemini, and JSON |
+| [agentqa-orchestrator](https://github.com/jensenmd/agentqa-orchestrator) **(this repository)** | Structured agentic code auditing using Python, Pydantic, Gemini, and JSON |
 
 ## Author
 
